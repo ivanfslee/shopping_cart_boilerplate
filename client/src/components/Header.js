@@ -1,5 +1,6 @@
-const Header = () => {
+import { useEffect } from "react";
 
+const Header = () => {
   useEffect(() => {
     //TODO
     // getCartItems from database
