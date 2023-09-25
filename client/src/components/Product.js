@@ -22,14 +22,27 @@ const Product = (props) => {
     }
   }
 
+  //added after submission to srdjan
+  const handleAddToCart = async (event) => {
+    event.preventDefault();
+    let productId = props.productData._id;
+    try {
+      console.log('add to cart route hit');
+      const {data} = await axios.post(`/api/add-to-cart`, {productId})
+      console.log('data from add to cart: ', data);
+    } catch(e) {
+      console.log('error in add to cart');
+    }
+  }
+  
   return (
     <li className="product">
       <div className="product-details">
         <h3>{title}</h3>
         <p className="price">{price}</p>
-        <p className="quantity">{quantity}</p>
+        <p className="quantity">{quantity} left in stock</p>
         <div className="actions product-actions">
-          <button className="add-to-cart">Add to Cart</button>
+          <button className="add-to-cart" onClick={handleAddToCart}>Add to Cart</button>
           <button className="edit" onClick={handleShowEditForm}>Edit</button>
           {displayEditForm && <EditForm productData={props.productData} />}
         </div>
